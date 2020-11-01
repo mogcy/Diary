@@ -37,7 +37,7 @@ namespace Diary
                 {
                     // データを挿入
                     if (this.textBoxForAddDiary.Text != "") {
-                        String sql = String.Format("INSERT INTO diary (date , text) VALUES ('{0}', '{1}')", DateTime.Now, this.textBoxForAddDiary.Text);
+                        String sql = String.Format("INSERT INTO diary (date , text) VALUES ('{0}', '{1}')", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), this.textBoxForAddDiary.Text);
                         SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter(sql, conn);
                         dataAdapter.Fill(dataSet);
                     } else

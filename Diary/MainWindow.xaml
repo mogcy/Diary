@@ -4,16 +4,24 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Diary"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Button x:Name="AddDiaryBtn" Content="日記を書く" HorizontalAlignment="Left" Margin="30,0,0,30" Width="150" RenderTransformOrigin="0.562,0.131" Click="AddDiaryBtnClick" FontSize="22" MaxWidth="150" MaxHeight="50" MinWidth="150" MinHeight="50" Height="50" VerticalAlignment="Bottom"/>
-        <Button x:Name="ShowDiaryBtn" Content="日記を見る" Margin="0,0,30,30" Click="ShowDiaryBtnClick" FontSize="22" RenderTransformOrigin="0.513,0.17" Width="150" MaxWidth="150" MaxHeight="50" Height="50" MinWidth="150" MinHeight="50" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
-        <DataGrid x:Name="DiaryListViewGrid" Margin="30,30,30,100" ItemsSource="{Binding Mode=OneWay}" HorizontalGridLinesBrush="#FFD4D4D4" VerticalGridLinesBrush="#FFD4D4D4" IsReadOnly="True">
+        <Button x:Name="ShowDiaryBtn" Content="日記を見る" Margin="0,0,30,30" Click="ShowDiaryBtnClick" FontSize="22" RenderTransformOrigin="0.513,0.17" Width="150" MaxWidth="150" MaxHeight="50" Height="50" MinWidth="150" MinHeight="50" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Column="1"/>
+        <DataGrid x:Name="DiaryListViewGrid" Margin="30,30,30,100" ItemsSource="{Binding Mode=OneWay}" HorizontalGridLinesBrush="#FFD4D4D4" VerticalGridLinesBrush="#FFD4D4D4" IsReadOnly="True" Grid.ColumnSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="日時" Binding="{Binding 'date'}" Width="100"/>
                 <DataGridTextColumn Header="本文" Binding="{Binding 'text'}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
+        <DatePicker x:Name="startDate" Margin="0,0,29,41" RenderTransformOrigin="0.946,0.542" SelectedDateFormat="Short" DisplayDate="2020-11-01" AutomationProperties.HelpText="開始日を指定してください" SelectedDate="{Binding Source={x:Static System:DateTime.Today}, Mode=OneTime}" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="107"/>
+        <DatePicker x:Name="endDate" Margin="29,0,0,41" RenderTransformOrigin="0.5,0.5" SelectedDateFormat="Short" AutomationProperties.HelpText="終了日を指定してください" SelectedDate="{Binding Source={x:Static System:DateTime.Today}, Mode=OneTime}" Height="24" VerticalAlignment="Bottom" Grid.Column="1" HorizontalAlignment="Left" Width="107"/>
+        <Label Content="～" Margin="386,0,384,39" Grid.ColumnSpan="2" Height="26" VerticalAlignment="Bottom" Width="22" HorizontalAlignment="Center"/>
     </Grid>
 </Window>

@@ -62,8 +62,11 @@ namespace Diary
                 //日記一覧の表示
                 using (DataSet dataSet = new DataSet())
                 {
+                    // 日付を取得
+                    String startdate = new DateTime(startDate.SelectedDate.Value.Year, startDate.SelectedDate.Value.Month, startDate.SelectedDate.Value.Day).ToString("yyyy-MM-dd");
+                    String enddate = new DateTime(endDate.SelectedDate.Value.Year, endDate.SelectedDate.Value.Month, endDate.SelectedDate.Value.Day).ToString("yyyy-MM-dd");
                     // データを取得
-                    String sql = "SELECT date, text From diary ORDER BY date DESC LIMIT 1000";
+                    String sql = String.Format("SELECT date, text FROM diary WHERE date(date) BETWEEN date('{0}') AND date('{1}') ORDER BY date DESC", startdate, enddate);
                     SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter(sql, conn);
                     dataAdapter.Fill(dataSet);
                     //データグリッドに表示
